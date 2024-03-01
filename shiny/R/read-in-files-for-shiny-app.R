@@ -9,7 +9,7 @@
 naming_database_file = "words-2024-01-29.csv" #  "final_database_4-11-23.csv"
 
 # this is the output of 04-join-naming-to-discourse.R
-# if there are any changes to final_database_04-11-23.csv, 
+# if there are any changes to words-2024-01-29.csv, 
 # or the VTT files / the nounCounts files from discourse
 # then this file should be updated by re-running 04-join-naming-to-discourse.R.
 discourse_naming_joined_file = "join_checked_automated.csv"
@@ -154,3 +154,4 @@ read_in_all_files <- function(shiny,
   
   
 }
+

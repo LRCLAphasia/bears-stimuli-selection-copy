@@ -15,11 +15,17 @@ library(fuzzyjoin)
 # these are the lemmas from discourse
 all <- read.csv(here("output", paste0("2023-08-14", "_nounCounts.csv")))
 
-# This is the place to blacklist specific words within specific discourse items
-# filter from both discourse stimuli column and the lemma column at the same time. 
+# Blacklist specific words within specific discourse items d/t those words being in written form
 all <- all |>  
-  filter()
-
+  subset(!(lemma == "lion" & stimuli == "ancient_rome") & !(lemma == "slide" & stimuli == "make_a_splash") 
+         & !(lemma == "book" & stimuli == "picture_this") & !(lemma == "elephant" & stimuli == "airport") 
+         & !(lemma == "helicopter" & stimuli == "airport") & !(lemma == "flower" & stimuli == "campsite") 
+         & !(lemma == "fish" & stimuli == "deep_sea_divers") & !(lemma == "tent" & stimuli == "campsite") 
+         & !(lemma == "penguin" & stimuli == "birthday_party_fun") & !(lemma == "penguin" & stimuli == "escape_from_the_zoo") 
+         & !(lemma == "penguin" & stimuli == "make_a_splash") & !(lemma == "sea" & stimuli == "deep_sea_divers") 
+         & !(lemma == "train" & stimuli == "wild_west") & !(lemma == "watch" & stimuli == "airport") 
+         & !(lemma == "penguin" & stimuli == "by_the_lake") & !(lemma == "icecreamcone" & stimuli == "escape_from_the_zoo") 
+         & !(lemma == "fountain" & stimuli == "flowerman"))
 
 
 # only keep the ones with sufficient salience
