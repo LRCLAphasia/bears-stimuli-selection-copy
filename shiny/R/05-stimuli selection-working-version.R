@@ -34,7 +34,7 @@ select_stimuli <- function(participant_theta,
                            target_prob_correct = 0.33,
                            min_discourse_stimuli = 9,
                            min_discourse_items = 54,
-                           total_tx_items = 180,
+                           total_tx_items = 180, # if 180, then study 1, if 500 then study 2
                            min_words_per_discourse_item = 4,
                            seed = 42,
                            participant_id,
@@ -102,7 +102,7 @@ select_stimuli <- function(participant_theta,
    files = read_in_all_files(shiny = shiny)
    
    cl = files$cl
-   glimpse(cl)
+   #glimpse(cl)
    diff = files$diff
    fuzz_join = files$fuzz_join
    item_params = files$item_params
@@ -146,8 +146,9 @@ select_stimuli <- function(participant_theta,
     # split out into naming only items and items that are also in discourse
     naming_db = cl |> filter(in_discourse == 0)
     discourse_db = cl |> filter(in_discourse == 1)
-    print(discourse_db |> count(stimuli, sort = T))
-    
+    #print(discourse_db |> count(stimuli, sort = T))
+    #print(naming_db |> filter(lemma_naming == "gun"))
+    #print(discourse_db |> filter(lemma_naming == "gun"))
 
     text = "- Matching discourse items..."
     cat(text, "\n")
@@ -258,8 +259,6 @@ select_stimuli <- function(participant_theta,
             mutate(condition = ifelse(is.na(group), NA, condition)) |> 
             arrange(group, desc(n))
           
-          #print(sl2, n = 30)
-          
           # this gets rid of the last one out so that we can add it back in 
           # assigned to a condition in a sec
           sl_out = sl2 |> drop_na(group)
@@ -309,7 +308,10 @@ select_stimuli <- function(participant_theta,
             sl_out = bind_rows(sl_out, tmp)
             non_matched = tail(non_matched, -1)
           }
+          
+        # print(sl_out )
             
+         
           #print("after adj2")
           #sl_out |> count(condition, wt = n) |> print()
           #print(sl_out |> count(condition))
@@ -319,6 +321,10 @@ select_stimuli <- function(participant_theta,
             inner_join(sl_out |> select(-n, -group), by = "stimuli") |> 
             filter(!is.na(condition))
           
+          # If I was going to fix the discourse item selection bugaboo it would end up getting
+          # fixed here. I would not take the best one before selecting stimuli...we would
+          # divy up stimuli and then check for any duplicates and pick a random one to keep. 
+
           # min_cat is a variable saved which has the lowest number of naming items
           # in any of the three conditinos
           # pulled from the discourse variables 
@@ -357,6 +363,7 @@ select_stimuli <- function(participant_theta,
             group_by(condition) |> 
             slice_min(order_by = p_correct, n = min_cat) |> 
             ungroup()
+          
           
           text = "- Matching additional naming only items..."
           cat(text, "\n")
@@ -582,7 +589,8 @@ select_stimuli <- function(participant_theta,
     # operates slightly differently if we're just pulling 
     # from naming items (the else) or not. 
     dat_out = list()
-    if(naming_only != 1){
+    if(naming_only != 1){ # study 1
+      if(total_tx_items == 180){
         for(i in 1:nrow(dat_nest)){
           tmp = dat_nest$data[[i]]
           ntx_tmp = ifelse(nrow(tmp)==220, 200, 40)
@@ -603,7 +611,69 @@ select_stimuli <- function(participant_theta,
           rm(ntx_tmp)
           rm(tmp)
         }
-    } else{
+      } else { # study 2:
+        cat("--- note: study 2 selection process --- \n")
+        for(i in 1:nrow(dat_nest)){
+          tmp = dat_nest$data[[i]]
+          
+          # print(head(tmp, 10))
+          # This is an addition just for study 2!
+          # sets the minimum cell size in any cell between
+          # condition, tx, and in_discourse to 8. Otherwise, 
+          # aims for 1/3. 
+          # Also sets the maximum size for the untreated words to 12
+          # Also, because there are 20 total untreated words, 
+          # if the number of treated words is 8 not in discourse,
+          # the number that are in discourse will be 12. 
+          n_total = nrow(tmp)
+          in_discourse1 <- tmp[tmp$in_discourse == 1, ]
+          in_discourse0 <- tmp[tmp$in_discourse == 0, ]
+
+          n_discourse <- nrow(in_discourse1)
+          n_not_discourse <- nrow(in_discourse0)
+          
+          n_discourse_untx <- ifelse(n_discourse*0.33 < 8, 8,
+                                     ifelse(n_discourse*0.33 > 12, 12, 10))
+          
+          n_discourse_tx <- n_discourse - n_discourse_untx
+          
+          n_naming_untx = 20 - n_discourse_untx
+          n_naming_tx = n_total - 20 - n_discourse_tx
+          
+          # naming only, not in discourse
+          groups1 <- anticlustering(
+            in_discourse0[,c(4, 5)], 
+            K = c(n_naming_tx, n_naming_untx),
+            method = "local-maximum",
+            repetitions = 100,
+            objective = "kplus",
+            standardize = TRUE
+          )
+          
+          # in discourse
+          groups2 <- anticlustering(
+            in_discourse1[,c(4, 5, 10)], 
+            K = c(n_discourse_tx, n_discourse_untx), # not sure which number add up
+            method = "local-maximum",
+            repetitions = 100,
+            objective = "kplus",
+            standardize = TRUE
+          )
+          
+          in_discourse0$tx = ifelse(groups1 == 1, 1, 0)
+          in_discourse1$tx = ifelse(groups2 == 1, 1, 0)
+          
+          tmp = bind_rows(in_discourse0, in_discourse1)
+          tmp$condition = dat_nest$condition_all[i]
+          
+          dat_out[[i]] = tmp
+          
+        }
+        
+        
+      }
+      
+    } else {
       for(i in 1:nrow(dat_nest)){
         tmp = dat_nest$data[[i]]
         gr <- anticlustering(
@@ -619,6 +689,7 @@ select_stimuli <- function(participant_theta,
         tmp$condition = dat_nest$condition_all[i]
         dat_out[[i]] = tmp
       }
+      
     }
     
     text = "- Generating final dataset..."
@@ -635,7 +706,7 @@ select_stimuli <- function(participant_theta,
     # select and rename columns as needed
     # set certain variables to factor
     # save the input criteria for reproducibility
-    df_final = bind_rows(dat_out) |> 
+    df_final = bind_rows(dat_out) |>
       select(word, in_discourse, discourse_stimuli, agreement, item_difficulty, p_correct,
              core_lex_percent, condition, tx, filename) |> 
       mutate(
@@ -701,6 +772,18 @@ select_stimuli <- function(participant_theta,
       updateProgress(detail = text)
       Sys.sleep(1)
     }
+    
+# -----------------------------------------------------------------------------#
+# tests
+# -----------------------------------------------------------------------------#   
+
+test1 = df_final |> 
+  filter(in_discourse == 1, is.na(discourse_stimuli)) |> nrow()
+
+if(test1 > 0){
+  warning("Non-discourse words found in discourse condtion. this may or may not be ok")
+}
+
 # -----------------------------------------------------------------------------#
 # If everything goes to plan, this is the list returned by the function
 # -----------------------------------------------------------------------------#
@@ -728,7 +811,7 @@ select_stimuli <- function(participant_theta,
 #' @examples
 score_upload <- function(new_dat){
   
-  times <- read_csv(here("data", "2023-08-14_timestamp.csv")) |> 
+  times <- suppressMessages(read_csv(here("data", "2023-08-14_timestamp.csv"))) |> 
     mutate(stimuli = str_replace_all(stimuli, "-", "_"),
            stimuli = ifelse(str_detect(stimuli,
                                        "ghouls"),

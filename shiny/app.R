@@ -43,12 +43,12 @@ ui <- page_sidebar(
         tabPanel("Main Settings",
                  br(),
                  # Participant id widget
-                 textInput(inputId = "participant", label = "Participant ID (required)"),
+                 textInput(inputId = "participant", label = "Participant ID (required)", value = "participant"),
                  # Naming ability widget
                  numericInput(inputId = "theta",
                               label = "Naming Ability T-scale ~N(50, 10)",
                               # these are the potential values for the widget
-                              value = 50, min = 30, max = 70, step = 0.1),
+                              value = 40, min = 30, max = 70, step = 0.1),
                  # When you hit submit, it runs the function in the stimuli selection script
                  radioButtons(inputId = "total_tx_items",
                               label = "Study (Total probe words)",
