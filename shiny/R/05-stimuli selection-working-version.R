@@ -625,20 +625,37 @@ select_stimuli <- function(participant_theta,
           # Also, because there are 20 total untreated words, 
           # if the number of treated words is 8 not in discourse,
           # the number that are in discourse will be 12. 
+          # 
+          # total number of items
           n_total = nrow(tmp)
+          # split into in_discourse and not (dataframes)
           in_discourse1 <- tmp[tmp$in_discourse == 1, ]
           in_discourse0 <- tmp[tmp$in_discourse == 0, ]
 
+          # how many are in discourse and not
           n_discourse <- nrow(in_discourse1)
           n_not_discourse <- nrow(in_discourse0)
           
+          # assign a sample size for the untreated words in discourse
+          # aim for 33% of the total number of discourse items
+          # but keep it between 8 and 12
           n_discourse_untx <- ifelse(n_discourse*0.33 < 8, 8,
                                      ifelse(n_discourse*0.33 > 12, 12, 10))
           
+          # the remainder are the treated words in discourse
           n_discourse_tx <- n_discourse - n_discourse_untx
           
+          # for the naming only items (not in discourse):
+          # untreated:
+          # we know the total untreated items is 20
+          # so then we subtract the number of untreated words that are in discourse
+          # from 20, to get the number remaining we need to select
           n_naming_untx = 20 - n_discourse_untx
+          # treated: same process as above but for treated items
           n_naming_tx = n_total - 20 - n_discourse_tx
+          
+          # now we assign words to treated and untreated separately for
+          # groups that are and are not in discourse
           
           # naming only, not in discourse
           groups1 <- anticlustering(
@@ -660,12 +677,15 @@ select_stimuli <- function(participant_theta,
             standardize = TRUE
           )
           
+          # The assignments came out as 1 and 2 and I wanted them
+          # to be 1 and 0 to match the variable from before
           in_discourse0$tx = ifelse(groups1 == 1, 1, 0)
           in_discourse1$tx = ifelse(groups2 == 1, 1, 0)
           
+          # Combine the data back together so it looks like study 1
           tmp = bind_rows(in_discourse0, in_discourse1)
+          # set the condition number and assign to our list
           tmp$condition = dat_nest$condition_all[i]
-          
           dat_out[[i]] = tmp
           
         }
