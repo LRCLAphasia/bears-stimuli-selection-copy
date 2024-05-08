@@ -12,12 +12,16 @@ library(bslib)
 # Define UI
 ui <- page_sidebar(
   theme = bs_theme(version = 5, spacer = "0.9rem", 
-                   bootswatch = "cosmo", primary = "#213AA6", base_font = font_google("Roboto"), 
-                   heading_font = font_google("Roboto"), font_scale = 0.85, secondary = "#E3B317"),
+                   bootswatch = "cosmo",
+                   primary = "#021636",
+                   bg = "#EEE",
+                   fg = "#021636",
+                   base_font = font_google("Roboto"), 
+                   heading_font = font_google("Roboto"), font_scale = 0.85, secondary = "#FFB81C"),
   # making the error message a little more obvious
   tags$head(
     tags$style(HTML("
-      .bslib-page-title{background-color: #213AA6}
+      
       .shiny-output-error-validation {
         color: #000000;
         font-weight: bold;
