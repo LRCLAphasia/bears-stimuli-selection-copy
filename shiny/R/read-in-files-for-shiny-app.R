@@ -6,7 +6,7 @@
 # re-run R/04-join-naming-to-discourse.R.
 # save it in bears-stimuli-selection/data AND in bears-stimuli-selection/shiny/data/ 
 # (need to save in both locations)
-naming_database_file = "words-2024-01-29.csv" #  "final_database_4-11-23.csv"
+naming_database_file = "words-2024-01-31.csv" #  "final_database_4-11-23.csv"
 
 # this is the output of 04-join-naming-to-discourse.R
 # if there are any changes to words-2024-01-29.csv, 
