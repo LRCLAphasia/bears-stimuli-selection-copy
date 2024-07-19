@@ -76,7 +76,7 @@ read_in_all_files <- function(shiny,
   
   fuzz_join = suppressMessages(read_csv(discourse_naming_joined_file,
                                         col_types = cols())) |> 
-    filter(match == 1 | dist == <0.001) |> 
+    filter(match == 1 | dist <0.001) |> 
     select(source:lemma_dis) |> 
     filter(percent >= min_discourse_salience, agreement >= min_naming_agreement) |> 
     select(source, lemma=lemma_naming, stimuli, percent, lemma_dis) |> 
