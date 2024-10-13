@@ -587,6 +587,8 @@ select_stimuli <- function(participant_theta,
     # loop over the conditions with anticlustering
     dat_nest = dat |> 
       nest_by(condition_all)
+    
+    print(dat |> count(condition_all))
     # items_per_condition = ifelse(total_tx_items==180, total_tx_items/3)
     # ncontrol = 20 # always 20
     # ntx = items_per_condition-ncontrol # remaining items are tx regardless of study
@@ -600,26 +602,121 @@ select_stimuli <- function(participant_theta,
     # 
     dat_out = list()
     if(naming_only != 1){
-        for(i in 1:nrow(dat_nest)){
-          tmp = dat_nest$data[[i]]
-          ntx_tmp = ifelse(nrow(tmp) > 140, study2_max, 40)
-          control_tmp = 20
-          gr <- anticlustering(
-            tmp[, c(4, 5, 10)], # use the variables directly
-            K = c(ntx_tmp, control_tmp),
-            method = "local-maximum",
-            categories = tmp$in_discourse,
-            repetitions = 100,
-            objective = "kplus",
-            standardize = TRUE
-          )
-          tmp$tx = ifelse(gr == 1, 1, 0)
-          tmp$condition = dat_nest$condition_all[i]
-          dat_out[[i]] = tmp
-          rm(control_tmp)
-          rm(ntx_tmp)
-          rm(tmp)
+      
+      
+      if(total_tx_items == 180){
+          for(i in 1:nrow(dat_nest)){
+            tmp = dat_nest$data[[i]]
+            ntx_tmp = 40
+            control_tmp = 20
+            gr <- anticlustering(
+              tmp[, c(4, 5, 10)], # use the variables directly
+              K = c(ntx_tmp, control_tmp),
+              method = "local-maximum",
+              categories = tmp$in_discourse,
+              repetitions = 100,
+              objective = "kplus",
+              standardize = TRUE
+            )
+            tmp$tx = ifelse(gr == 1, 1, 0)
+            tmp$condition = dat_nest$condition_all[i]
+            dat_out[[i]] = tmp
+            rm(control_tmp)
+            rm(ntx_tmp)
+            rm(tmp)
+          }
+        } else {
+          
+          cat("--- note: study 2 selection process --- \n")
+          for(i in 1:nrow(dat_nest)){
+            tmp = dat_nest$data[[i]]
+            
+            # for(i in 1:nrow(dat_nest)){
+            #   tmp = dat_nest$data[[i]]
+            #   ntx_tmp = ifelse(nrow(tmp) > 140, study2_max, 40)
+            #   control_tmp = 20
+            #   gr <- anticlustering(
+            #     tmp[, c(4, 5, 10)], # use the variables directly
+            #     K = c(ntx_tmp, control_tmp),
+            #     method = "local-maximum",
+            #     categories = tmp$in_discourse,
+            #     repetitions = 100,
+            #     objective = "kplus",
+            #     standardize = TRUE
+            #   )
+            #   tmp$tx = ifelse(gr == 1, 1, 0)
+            #   tmp$condition = dat_nest$condition_all[i]
+            #   dat_out[[i]] = tmp
+            #   rm(control_tmp)
+            #   rm(ntx_tmp)
+            #   rm(tmp)
+            # }
+            # 
+            # 
+            # 
+            #             # print(head(tmp, 10))
+            # This is an addition just for study 2!
+            # sets the minimum cell size in any cell between
+            # condition, tx, and in_discourse to 8. Otherwise, 
+            # aims for 1/3. 
+            # Also sets the maximum size for the untreated words to 12
+            # Also, because there are 20 total untreated words, 
+            # if the number of treated words is 8 not in discourse,
+            # the number that are in discourse will be 12. 
+            # 
+            # 
+            #      
+            print(head(tmp))
+            print(nrow(tmp))
+            
+            n_total = nrow(tmp)
+            in_discourse1 <- tmp[tmp$in_discourse == 1, ]
+            in_discourse0 <- tmp[tmp$in_discourse == 0, ]
+            n_discourse <- nrow(in_discourse1)
+            n_not_discourse <- nrow(in_discourse0)
+            
+            n_discourse_untx <- ifelse(n_discourse*0.33 < 8, 8,
+                                       ifelse(n_discourse*0.33 > 12, 12, 10))
+            
+            n_discourse_tx <- n_discourse - n_discourse_untx
+            
+            n_naming_untx = 20 - n_discourse_untx
+            n_naming_tx = n_total - 20 - n_discourse_tx
+            
+            # naming only, not in discourse
+            groups1 <- anticlustering(
+              in_discourse0[,c(4, 5)], 
+              K = c(n_naming_tx, n_naming_untx),
+              method = "local-maximum",
+              repetitions = 100,
+              objective = "kplus",
+              standardize = TRUE
+            )
+            
+            # in discourse
+            groups2 <- anticlustering(
+              in_discourse1[,c(4, 5, 10)], 
+              K = c(n_discourse_tx, n_discourse_untx), # not sure which number add up
+              method = "local-maximum",
+              repetitions = 100,
+              objective = "kplus",
+              standardize = TRUE
+            )
+            
+            in_discourse0$tx = ifelse(groups1 == 1, 1, 0)
+            in_discourse1$tx = ifelse(groups2 == 1, 1, 0)
+            
+            tmp = bind_rows(in_discourse0, in_discourse1)
+            tmp$condition = dat_nest$condition_all[i]
+            
+            dat_out[[i]] = tmp
+            
+          }
+      
         }
+      
+      
+      
     } else{
       for(i in 1:nrow(dat_nest)){
         tmp = dat_nest$data[[i]]
@@ -674,7 +771,8 @@ select_stimuli <- function(participant_theta,
             naming_item_parameter_file,
              rep(NA, n()-4)),
         blacklisted_discourse_items = c(blacklist_discourse_items,rep(NA, n()-length(blacklist_discourse_items))),
-        blacklisted_naming_items = c(blacklist_naming_items,rep(NA, n()-length(blacklist_naming_items)))
+        blacklisted_naming_items = c(blacklist_naming_items,rep(NA, n()-length(blacklist_naming_items))),
+        study2_max_items = study2_max
       ) 
     
     text = "- Creating plots and summary tables..."
