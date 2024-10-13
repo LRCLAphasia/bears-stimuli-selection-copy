@@ -34,14 +34,15 @@ select_stimuli <- function(participant_theta,
                            target_prob_correct = 0.33,
                            min_discourse_stimuli = 9,
                            min_discourse_items = 54,
-                           total_tx_items = 180,
+                           total_tx_items = 180, # 180 vs 500 study 1 vs. study 2.
                            min_words_per_discourse_item = 4,
                            seed = 42,
                            participant_id,
                            shiny = TRUE,
                            updateProgress = NULL,
                            blacklist_discourse_items = NA,
-                           blacklist_naming_items = NA
+                           blacklist_naming_items = NA,
+                           study2_max = 200
                            ){
   
   # function parameters
@@ -102,7 +103,7 @@ select_stimuli <- function(participant_theta,
    files = read_in_all_files(shiny = shiny)
    
    cl = files$cl
-   glimpse(cl)
+   #glimpse(cl)
    diff = files$diff
    fuzz_join = files$fuzz_join
    item_params = files$item_params
@@ -146,7 +147,7 @@ select_stimuli <- function(participant_theta,
     # split out into naming only items and items that are also in discourse
     naming_db = cl |> filter(in_discourse == 0)
     discourse_db = cl |> filter(in_discourse == 1)
-    print(discourse_db |> count(stimuli, sort = T))
+    # print(discourse_db |> count(stimuli, sort = T))
     
 
     text = "- Matching discourse items..."
@@ -373,7 +374,7 @@ select_stimuli <- function(participant_theta,
 #  we could probably use anticlustering
 # for this bit, but this still works so. 
 # -----------------------------------------------------------------------------#
-          
+          #print(discourse_items[,3:5])
           # make triplets
           # based on agreement, percent salience, and difficulty
           matching(
@@ -420,7 +421,22 @@ select_stimuli <- function(participant_theta,
           
           # how many items are left that need to be assigned. 
           # will change this value for study 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! STUDY 2 CHANGE HERE
-          N_naming = total_tx_items-nrow(discourse_items)
+          if(total_tx_items == 500){
+            
+            max_high = study2_max + 20
+            total_study2_items = max_high*2+60
+            total_items_check = total_study2_items
+            N_naming = total_study2_items-nrow(discourse_items)
+            #print("study2 n")
+            
+          } else {
+            
+            max_high = 60
+            #print("study1 n")
+            N_naming = total_tx_items-nrow(discourse_items)
+            total_items_check = total_tx_items
+          }
+
           
           # If we're not hitting anything close to the probabilty correct target
           # bump the target down for the naming items
@@ -464,7 +480,7 @@ select_stimuli <- function(participant_theta,
     dat = cl |> 
       mutate(p_correct = p_cor(theta, difficulty),
              closest = abs(ideal_prob_correct - p_correct)) |> 
-      filter(p_correct < 0.75) |> 
+      filter(p_correct < 0.75) |> # GOVERNS DIFFICULTY CUTOFF!!!!!
       distinct(lemma_naming, agreement, difficulty, filename, in_discourse, p_correct, closest) |> 
       arrange(closest) |> 
       head(total_tx_items) |> 
@@ -492,10 +508,11 @@ select_stimuli <- function(participant_theta,
     N = nrow(additional_items)
     
     if(total_tx_items == 500){
+    
       items_per_cat = discourse_items_total/3
       order = sample(c(1, 2, 3), size = 3)
-      sample_this = c(rep(order[1], 220-items_per_cat),
-                      rep(order[2], 220-items_per_cat),
+      sample_this = c(rep(order[1], max_high-items_per_cat),
+                      rep(order[2], max_high-items_per_cat),
                       rep(order[3], 60-items_per_cat))
     } else  {
       sample_this = rep(c(1, 2, 3), length.out = total_tx_items-discourse_items_total)
@@ -503,15 +520,14 @@ select_stimuli <- function(participant_theta,
 
     # initialize groupings for anticlustering; new items get random group affiliation
     initial_groupings <- c(discourse_items$condition, sample(sample_this))
- 
+    
     # print(length(initial_groupings))
     # print(total_tx_items)
     # 
     # print(dat)
     
-    
     # if we don't get enough items, we need to error out. 
-    if(nrow(dat) < total_tx_items){
+    if(nrow(dat) < total_items_check){
       return(
         list(
           dat = NA,
@@ -530,8 +546,7 @@ select_stimuli <- function(participant_theta,
         )
       )
     }
-   
-   
+
 
     # Here's where new groups are assigned.
     # They're balanced for agreement and item difficulty
@@ -572,7 +587,6 @@ select_stimuli <- function(participant_theta,
     # loop over the conditions with anticlustering
     dat_nest = dat |> 
       nest_by(condition_all)
-    # 
     # items_per_condition = ifelse(total_tx_items==180, total_tx_items/3)
     # ncontrol = 20 # always 20
     # ntx = items_per_condition-ncontrol # remaining items are tx regardless of study
@@ -581,11 +595,14 @@ select_stimuli <- function(participant_theta,
     # for each condition, assign into treated and untreated
     # operates slightly differently if we're just pulling 
     # from naming items (the else) or not. 
+
+    # 
+    # 
     dat_out = list()
     if(naming_only != 1){
         for(i in 1:nrow(dat_nest)){
           tmp = dat_nest$data[[i]]
-          ntx_tmp = ifelse(nrow(tmp)==220, 200, 40)
+          ntx_tmp = ifelse(nrow(tmp) > 140, study2_max, 40)
           control_tmp = 20
           gr <- anticlustering(
             tmp[, c(4, 5, 10)], # use the variables directly

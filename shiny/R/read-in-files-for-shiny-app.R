@@ -6,13 +6,13 @@
 # re-run R/04-join-naming-to-discourse.R.
 # save it in bears-stimuli-selection/data AND in bears-stimuli-selection/shiny/data/ 
 # (need to save in both locations)
-naming_database_file = "words-2024-01-31.csv" #  "final_database_4-11-23.csv"
+naming_database_file = "words 2024-08-29_numeric.csv" #  "final_database_4-11-23.csv"
 
 # this is the output of 04-join-naming-to-discourse.R
 # if there are any changes to words-2024-01-29.csv, 
 # or the VTT files / the nounCounts files from discourse
 # then this file should be updated by re-running 04-join-naming-to-discourse.R.
-discourse_naming_joined_file = "join_checked_automated.csv"
+discourse_naming_joined_file = "join_checked_automated_10-2024.csv"
 
 # this is the output of 03-timestamp-norming.R
 # If the VTT files change, then it should be updated by re-running 03-timestamp-norming.R
@@ -23,13 +23,13 @@ discourse_timestamp_file = "2023-08-14_timestamp.csv"
 # norming on items so that we have more data on age of acquisition or
 # NPhon or lexical frequency, update the input files in that script
 # and re-run it to update this file.
-naming_item_parameter_file = "AoA-phonemes-freq_combined_2023_11_02.csv"
+naming_item_parameter_file = "AoA-phonemes-freq_combined_2024_08_23.csv"
 
 
 
 read_in_all_files <- function(shiny,
                               min_naming_agreement = 75,
-                              min_discourse_salience = 33,
+                              min_discourse_salience = 30,
                               target_prob_correct = 0.33,
                               min_discourse_stimuli = 9,
                               min_discourse_items = 54,
@@ -68,7 +68,7 @@ read_in_all_files <- function(shiny,
     distinct() |> 
     filter(agreement >= min_naming_agreement) |> 
     group_by(lemma) |> 
-    mutate(source = paste(source, collapse = ", ")) |> 
+    mutate(source = paste(source, collapse = ", "), lemma = str_remove(lemma, " ")) |> 
     distinct()
   
   # this is a joined df where I hand chekced the fuzzy join in 01-new-approach
@@ -80,7 +80,8 @@ read_in_all_files <- function(shiny,
     select(source:lemma_dis) |> 
     filter(percent >= min_discourse_salience, agreement >= min_naming_agreement) |> 
     select(source, lemma=lemma_naming, stimuli, percent, lemma_dis) |> 
-    distinct()
+    distinct() |> 
+    mutate(lemma = str_remove(lemma, " "))
   
   # total number of unique found words between naming and discourse
   # not saved
@@ -89,7 +90,7 @@ read_in_all_files <- function(shiny,
   
   # get the average time to produce of each stimuli for more balancing
   # used a few times later on
-  times <- read_csv(timestamp_file, col_types = cols()) |> 
+  times <- suppressMessages(read_csv(timestamp_file, col_types = cols())) |> 
     mutate(stimuli = str_replace_all(stimuli, "-", "_"),
            stimuli = ifelse(str_detect(stimuli,
                                        "ghouls"),
@@ -109,10 +110,10 @@ read_in_all_files <- function(shiny,
   # updated again...
   # 
   item_params = 
-    suppressWarnings(
+    suppressMessages(
       read_csv(naming_parameters_file) |> 
-        select(Word, LgSUBTLCD, Age_Of_Acquisition, NPhon) |> 
-        mutate(LgSUBTLCD = readr::parse_number(LgSUBTLCD))
+        select(Word, LgSUBTLCD, Age_Of_Acquisition, NPhon)# |> 
+        #mutate(LgSUBTLCD = readr::parse_number(LgSUBTLCD))
         #        #NPhon = readr::parse_number(NPhon),
         #        Age_Of_Acquisition = readr::parse_number(Age_Of_Acquisition)) 
     )

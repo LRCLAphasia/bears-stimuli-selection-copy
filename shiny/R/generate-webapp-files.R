@@ -33,7 +33,7 @@ if(study == "180"){
       all(df |> distinct(condition, word) |> count(condition) |> pull(n) == 60)
   )
 } else {
-  print( df |> count(condition) |> arrange(n) |> pull(n)) # distinct(condition, word) |> 
+  #print( df |> count(condition) |> arrange(n) |> pull(n)) # distinct(condition, word) |> 
   stopifnot(
     "unbalanced conditions or < 180 words present in selected stimuli. can't generate input files" = 
       df |>  count(condition) |> arrange(n) |> pull(n) == c(60, 220, 220) # distinct(condition, word) |>

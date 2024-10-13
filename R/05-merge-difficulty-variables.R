@@ -42,16 +42,28 @@ df_c = df |>
 df_combined <- df_c |> 
   select(Word, Age_Of_Acquisition = Age_Of_Acquisition2, LgSUBTLCD = LgSUBTLCD2, NPhon)
 
-write.csv(df_c, row.names = FALSE, file = here("output", "AoA-phonemes-freq_combined_2023_11_02.csv"))
-write.csv(df_combined, row.names = FALSE, file = here("output", "AoA-phonemes-freq_combined_2023_11_02.csv"))
-write.csv(df_combined, row.names = FALSE, file = here("shiny", "data", "AoA-phonemes-freq_combined_2023_11_02.csv"))
+
+
+# write.csv(df_c, row.names = FALSE, file = here("output", "AoA-phonemes-freq_combined_2023_11_02.csv"))
+# write.csv(df_combined, row.names = FALSE, file = here("output", "AoA-phonemes-freq_combined_2023_11_02.csv"))
+# write.csv(df_combined, row.names = FALSE, file = here("shiny", "data", "AoA-phonemes-freq_combined_2023_11_02.csv"))
+
+# Update 2024-08 - new file after phase 3: 
+# 
+df_c_08_2024 = read_csv(here("data", "AoA-phonemes-freq_combined_handchecked_2024_08_23.csv")) |> 
+  select(Word, Age_Of_Acquisition = Age_Of_Acquisition.x, LgSUBTLCD, NPhon)
+
+write.csv(df_c_08_2024, row.names = FALSE, file = here("output", "AoA-phonemes-freq_combined_2024_08_23.csv"))
+write.csv(df_c_08_2024, row.names = FALSE, file = here("data", "AoA-phonemes-freq_combined_2024_08_23.csv"))
+write.csv(df_c_08_2024, row.names = FALSE, file = here("shiny", "data", "AoA-phonemes-freq_combined_2024_08_23.csv"))
+
 
 # how many rows are there with complete data?
 
 # initial files
-nrow(df_c |> filter(!is.na(Age_Of_Acquisition) & !is.na(LgSUBTLCD) & !is.na(NPhon)))
-# 559
+nrow(df_c_08_2024 |> filter(!is.na(Age_Of_Acquisition) & !is.na(LgSUBTLCD) & !is.na(NPhon)))
+# 959
 
 # with added values
-nrow(df_c |> filter(!is.na(Age_Of_Acquisition2) & !is.na(LgSUBTLCD2) & !is.na(NPhon)))
-# 588
+nrow(df_c_08_2024 |> filter(!is.na(Age_Of_Acquisition) & !is.na(LgSUBTLCD) & !is.na(NPhon)))
+# 959

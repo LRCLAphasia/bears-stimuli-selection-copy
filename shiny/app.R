@@ -58,6 +58,9 @@ ui <- page_sidebar(
                  numericInput(inputId = "min_words_per_discourse_item",
                               label = "Minimum number of qualifying words to consider using a discourse item.",
                               value = 4, min = 2, max = 6, step = 1),
+                 sliderInput(inputId = "study2_max_items",
+                              label = "Max number of treated words in study 2",
+                              value = 200, min = 140, max = 200, step = 10, ticks = FALSE),
                  p("Decrease to add more discourse words, increase to reduce discourse testing burden"), hr(),
                  actionButton("submit", "Select Stimuli"),
                  # Enables download of the stimuli file (not for the treatment app though)
@@ -167,7 +170,8 @@ ui <- page_sidebar(
                    and then make the condition assignments - they don't need to be done right away."),
                    p("Please contact Rob with any issues/bugs. This app is still experimental.")
                  )
-        )
+        ),
+        tabPanel(title = "Data Preview", DTOutput("data_preview"))
       )
       
     
@@ -176,7 +180,25 @@ ui <- page_sidebar(
 
 # Server logic
 server <- function(input, output, session) {
-
+  
+# -----------------------------------------------------------------------------#
+# Preview data for troubleshooting
+# -----------------------------------------------------------------------------#
+  output$data_preview  <- renderDT({
+    files = read_in_all_files(shiny = TRUE)
+    datatable(
+      files$cl,
+      filter = list(position = 'top', clear = FALSE),
+      options = list(
+        dom = "t",
+        paging = FALSE,
+        scrollY = TRUE,
+        scrollX = TRUE,
+        search = list(regex = TRUE, caseInsensitive = TRUE)
+      )
+    )
+  })
+  
 # -----------------------------------------------------------------------------#
 # Setup
 # -----------------------------------------------------------------------------#
@@ -271,19 +293,20 @@ server <- function(input, output, session) {
     
     tmp_error = 0
     tryCatch({
-      v$output = select_stimuli(participant_theta      = input$theta,
-                                min_naming_agreement   = input$min_naming_agreement,
-                                min_discourse_salience = input$min_discourse_salience,
-                                target_prob_correct    = input$target_prob_correct,
-                                min_discourse_stimuli  = input$min_discourse_stimuli,
-                                min_discourse_items    = input$min_discourse_items,
-                                total_tx_items         = as.numeric(input$total_tx_items),
+      v$output = select_stimuli(participant_theta            = input$theta,
+                                min_naming_agreement         = input$min_naming_agreement,
+                                min_discourse_salience       = input$min_discourse_salience,
+                                target_prob_correct          = input$target_prob_correct,
+                                min_discourse_stimuli        = input$min_discourse_stimuli,
+                                min_discourse_items          = input$min_discourse_items,
+                                total_tx_items               = as.numeric(input$total_tx_items),
                                 min_words_per_discourse_item = input$min_words_per_discourse_item,
-                                seed                   = input$seed,
-                                participant_id         = input$participant,
-                                updateProgress         = updateProgress,
-                                blacklist_discourse_items = input$blacklist_discourse,
-                                blacklist_naming_items = input$blacklist_naming
+                                seed                         = input$seed,
+                                participant_id               = input$participant,
+                                updateProgress               = updateProgress,
+                                blacklist_discourse_items    = input$blacklist_discourse,
+                                blacklist_naming_items       = input$blacklist_naming,
+                                study2_max                   = input$study2_max_items
       )
     }, error = function(e) {
       showNotification(paste(e, collapse = "\n"), type = "error")
@@ -291,7 +314,7 @@ server <- function(input, output, session) {
       return()
     }, silent=TRUE)
     
-    if(input$total_tx_items == "500" & tmp_error == 0){
+    if(input$total_tx_items == "500" & tmp_error == 0 & isFALSE(v$output$error)){
      tmp =  
        (v$output$dat |> 
         count(condition) |> 

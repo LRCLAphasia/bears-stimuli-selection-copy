@@ -1,0 +1,209 @@
+source,agreement,stimuli,n,percent,lemma_naming,lemma_dis,dist,match
+DR2,100,quest,9,29.03225806,bear,beard,0.066666667,NA
+DR2,100,return,10,32.25806452,bear,beard,0.066666667,NA
+DR2,100,journey,10,32.25806452,block,lock,0.066666667,NA
+moreno-martinez,86,arrival_6,8,25.80645161,brain,rain,0.066666667,NA
+moreno-martinez,86,quest,19,61.29032258,brain,rain,0.066666667,NA
+boss,94,arrival_1,8,25.80645161,broom,room,0.066666667,NA
+boss,94,arrival_4,8,25.80645161,broom,room,0.066666667,NA
+boss,94,arrival_6,14,45.16129032,broom,room,0.066666667,NA
+boss,94,dinosaurs_spacemen_and_ghouls,18,58.06451613,broom,room,0.066666667,NA
+boss,94,exhibit_12,8,25.80645161,broom,room,0.066666667,NA
+boss,94,flowerman,12,38.70967742,broom,room,0.066666667,NA
+boss,94,journey,27,87.09677419,broom,room,0.066666667,NA
+boss,94,return,27,87.09677419,broom,room,0.066666667,NA
+boss,71,wanderer,24,77.41935484,cane,crane,0.066666667,NA
+brodeur,88,flowerman,21,67.74193548,chair,hair,0.066666667,NA
+brodeur,88,picture_this,8,25.80645161,chair,hair,0.066666667,NA
+moreno-martinez,72,airport,11,35.48387097,chard,card,0.066666667,NA
+boss,92,journey,10,32.25806452,clock,lock,0.066666667,NA
+brodeur,100,airport,12,38.70967742,horse,hose,0.066666667,NA
+moreno-martinez,93,airport,12,38.70967742,house,hose,0.066666667,NA
+brodeur,98,by_the_lake,10,32.25806452,kite,kites,0.066666667,1
+brodeur,88,ancient_rome,27,87.09677419,lion,lions,0.066666667,1
+brodeur,88,escape_from_the_zoo,14,45.16129032,lion,lions,0.066666667,1
+DR2,100,arrival_1,26,83.87096774,lock,clock,0.066666667,NA
+DR2,100,arrival_3,17,54.83870968,lock,clock,0.066666667,NA
+DR2,100,flowerman,12,38.70967742,lock,clock,0.066666667,NA
+DR2,100,arrival_5,11,35.48387097,medal,meal,0.066666667,NA
+boss,78,arrival_3,16,51.61290323,nail,snail,0.066666667,NA
+boss,100,ancient_rome,8,25.80645161,pear,spear,0.066666667,NA
+boss,100,journey,8,25.80645161,pear,spear,0.066666667,NA
+boss,100,quest,17,54.83870968,pear,spear,0.066666667,NA
+boss,100,wanderer,10,32.25806452,pear,pearl,0.066666667,NA
+boss,84,flowerman,23,74.19354839,scale,sale,0.066666667,NA
+boss,100,dinosaurs_spacemen_and_ghouls,8,25.80645161,screw,crew,0.066666667,NA
+boss,77,being_a_pirate,12,38.70967742,shoe,shore,0.066666667,NA
+boss,77,wanderer,9,29.03225806,shoe,shore,0.066666667,NA
+DR2,95.5,ancient_rome,12,38.70967742,slide,side,0.066666667,NA
+DR2,95.5,arrival_1,15,48.38709677,slide,side,0.066666667,NA
+DR2,95.5,arrival_2,9,29.03225806,slide,side,0.066666667,NA
+DR2,95.5,arrival_3,9,29.03225806,slide,side,0.066666667,NA
+DR2,95.5,arrival_4,16,51.61290323,slide,side,0.066666667,NA
+DR2,95.5,arrival_5,14,45.16129032,slide,side,0.066666667,NA
+DR2,95.5,arrival_6,19,61.29032258,slide,side,0.066666667,NA
+DR2,95.5,being_a_pirate,15,48.38709677,slide,side,0.066666667,NA
+DR2,95.5,birthday_party_fun,13,41.93548387,slide,side,0.066666667,NA
+DR2,95.5,by_the_lake,15,48.38709677,slide,side,0.066666667,NA
+DR2,95.5,campsite,23,74.19354839,slide,side,0.066666667,NA
+DR2,95.5,dinosaurs_spacemen_and_ghouls,20,64.51612903,slide,side,0.066666667,NA
+DR2,95.5,escape_from_the_zoo,11,35.48387097,slide,side,0.066666667,NA
+DR2,95.5,exhibit_12,10,32.25806452,slide,side,0.066666667,NA
+DR2,95.5,flowerman,19,61.29032258,slide,side,0.066666667,NA
+DR2,95.5,journey,24,77.41935484,slide,side,0.066666667,NA
+DR2,95.5,make_a_splash,19,61.29032258,slide,side,0.066666667,NA
+DR2,95.5,picture_this,14,45.16129032,slide,side,0.066666667,NA
+DR2,95.5,quest,23,74.19354839,slide,side,0.066666667,NA
+DR2,95.5,return,17,54.83870968,slide,side,0.066666667,NA
+DR2,95.5,unfriendly_giants,11,35.48387097,slide,side,0.066666667,NA
+DR2,95.5,waldo_1,15,48.38709677,slide,side,0.066666667,NA
+DR2,95.5,wanderer,24,77.41935484,slide,side,0.066666667,NA
+DR2,95.5,wild_west,14,45.16129032,slide,side,0.066666667,NA
+brodeur,98,airport,11,35.48387097,swing,wing,0.066666667,NA
+brodeur,98,arrival_6,9,29.03225806,swing,wing,0.066666667,NA
+brodeur,98,quest,18,58.06451613,swing,wing,0.066666667,NA
+brodeur,98,return,20,64.51612903,swing,wing,0.066666667,NA
+brodeur,98,wanderer,17,54.83870968,swing,wing,0.066666667,NA
+moreno-martinez,97,wanderer,8,25.80645161,sword,word,0.066666667,NA
+moreno-martinez,93,arrival_6,8,25.80645161,train,rain,0.066666667,NA
+moreno-martinez,93,quest,19,61.29032258,train,rain,0.066666667,NA
+Phase 3 Norming,100,escape_from_the_zoo,27,87.09677419,beard,bear,0.066666667,NA
+Phase 3 Norming,100,picture_this,15,48.38709677,beard,bear,0.066666667,NA
+Phase 3 Norming,100,ancient_rome,27,87.09677419,hose,horse,0.066666667,NA
+Phase 3 Norming,100,arrival_1,9,29.03225806,hose,house,0.066666667,NA
+Phase 3 Norming,100,arrival_4,16,51.61290323,hose,house,0.066666667,NA
+Phase 3 Norming,100,arrival_5,16,51.61290323,hose,house,0.066666667,NA
+Phase 3 Norming,100,arrival_6,9,29.03225806,hose,house,0.066666667,NA
+Phase 3 Norming,100,birthday_party_fun,14,45.16129032,hose,house,0.066666667,NA
+Phase 3 Norming,100,by_the_lake,13,41.93548387,hose,house,0.066666667,NA
+Phase 3 Norming,100,exhibit_12,12,38.70967742,hose,horse,0.066666667,NA
+Phase 3 Norming,100,flowerman,11,35.48387097,hose,horse,0.066666667,NA
+Phase 3 Norming,100,flowerman,28,90.32258065,hose,house,0.066666667,NA
+Phase 3 Norming,100,journey,21,67.74193548,hose,house,0.066666667,NA
+Phase 3 Norming,100,return,14,45.16129032,hose,horse,0.066666667,NA
+Phase 3 Norming,100,return,22,70.96774194,hose,house,0.066666667,NA
+Phase 3 Norming,100,unfriendly_giants,20,64.51612903,hose,house,0.066666667,NA
+Phase 3 Norming,100,waldo_1,9,29.03225806,hose,house,0.066666667,NA
+Phase 3 Norming,100,wanderer,28,90.32258065,hose,horse,0.066666667,NA
+Phase 3 Norming,100,wanderer,22,70.96774194,hose,house,0.066666667,NA
+Phase 3 Norming,100,wild_west,26,83.87096774,hose,horse,0.066666667,NA
+Phase 3 Norming,100,being_a_pirate,10,32.25806452,snail,sail,0.066666667,NA
+Phase 3 Norming,100,deep_sea_divers,9,29.03225806,snail,sail,0.066666667,NA
+Phase 3 Norming,100,wanderer,22,70.96774194,snail,sail,0.066666667,NA
+Phase 3 Norming,100,airport,9,29.03225806,star,stair,0.066666667,NA
+Phase 3 Norming,100,arrival_4,8,25.80645161,star,stair,0.066666667,NA
+Phase 3 Norming,100,arrival_5,12,38.70967742,star,stair,0.066666667,NA
+Phase 3 Norming,100,arrival_6,16,51.61290323,star,stair,0.066666667,NA
+Phase 3 Norming,100,exhibit_12,15,48.38709677,star,stair,0.066666667,NA
+Phase 3 Norming,100,return,19,61.29032258,star,stair,0.066666667,NA
+Phase 3 Norming,100,wanderer,16,51.61290323,star,stair,0.066666667,NA
+Phase 3 Norming,96.4,arrival_6,8,25.80645161,crack,rack,0.066666667,NA
+Phase 3 Norming,96.4,quest,25,80.64516129,wing,swing,0.066666667,NA
+Phase 3 Norming,92.9,wanderer,13,41.93548387,robot,root,0.066666667,NA
+Phase 3 Norming,92.9,arrival_1,13,41.93548387,stem,steam,0.066666667,NA
+Phase 3 Norming,92.9,arrival_6,8,25.80645161,stem,steam,0.066666667,NA
+Phase 3 Norming,92.9,journey,8,25.80645161,stem,steam,0.066666667,NA
+Phase 3 Norming,92.9,wanderer,8,25.80645161,stem,steam,0.066666667,NA
+Phase 3 Norming,92.9,arrival_3,16,51.61290323,sail,snail,0.066666667,NA
+Phase 3 Norming,89.3,arrival_1,13,41.93548387,team,steam,0.066666667,NA
+Phase 3 Norming,89.3,arrival_6,8,25.80645161,team,steam,0.066666667,NA
+Phase 3 Norming,89.3,journey,8,25.80645161,team,steam,0.066666667,NA
+Phase 3 Norming,89.3,wanderer,8,25.80645161,team,steam,0.066666667,NA
+Phase 3 Norming,89.3,arrival_6,8,25.80645161,track,rack,0.066666667,NA
+Phase 3 Norming,85.7,arrival_4,17,54.83870968,coral,coal,0.066666667,NA
+Phase 3 Norming,85.7,arrival_1,8,25.80645161,hair,chair,0.066666667,NA
+Phase 3 Norming,85.7,arrival_3,8,25.80645161,hair,chair,0.066666667,NA
+Phase 3 Norming,85.7,flowerman,9,29.03225806,hair,chair,0.066666667,NA
+Phase 3 Norming,85.7,journey,13,41.93548387,hair,chair,0.066666667,NA
+Phase 3 Norming,85.7,return,14,45.16129032,hair,chair,0.066666667,NA
+Phase 3 Norming,89.3,arrival_6,10,32.25806452,steam,stem,0.066666667,NA
+Phase 3 Norming,89.3,by_the_lake,8,25.80645161,steam,team,0.066666667,NA
+Phase 3 Norming,78.6,birthday_party_fun,10,32.25806452,root,robot,0.066666667,NA
+Phase 3 Norming,82.2,by_the_lake,16,51.61290323,stand,sand,0.066666667,NA
+Phase 3 Norming,75,deep_sea_divers,8,25.80645161,coal,coral,0.066666667,NA
+Phase 3 Norming,75,wanderer,17,54.83870968,coal,coral,0.066666667,NA
+Phase 3 Norming,92.8,wanderer,8,25.80645161,line,liner,0.066666667,NA
+DR2,92.9,arrival_4,14,45.16129032,bride,bridge,0.055555556,NA
+DR2,92.9,campsite,21,67.74193548,bride,bridge,0.055555556,NA
+DR2,92.9,flowerman,25,80.64516129,bride,bridge,0.055555556,NA
+DR2,92.9,journey,18,58.06451613,bride,bridge,0.055555556,NA
+DR2,92.9,make_a_splash,13,41.93548387,bride,bridge,0.055555556,NA
+DR2,92.9,quest,29,93.5483871,bride,bridge,0.055555556,NA
+DR2,92.9,return,19,61.29032258,bride,bridge,0.055555556,NA
+DR2,92.9,wanderer,19,61.29032258,bride,bridge,0.055555556,NA
+brodeur,95,journey,12,38.70967742,cloud,clouds,0.055555556,1
+brodeur,73,arrival_4,23,74.19354839,monkey,money,0.055555556,NA
+brodeur,73,arrival_5,9,29.03225806,monkey,money,0.055555556,NA
+brodeur,73,arrival_6,24,77.41935484,monkey,money,0.055555556,NA
+brodeur,73,wild_west,9,29.03225806,monkey,money,0.055555556,NA
+DR2,72.7,journey,18,58.06451613,paper,papers,0.055555556,1
+DR2,99.9,airport,9,29.03225806,stairs,stair,0.055555556,1
+DR2,99.9,arrival_4,8,25.80645161,stairs,stair,0.055555556,1
+DR2,99.9,arrival_5,12,38.70967742,stairs,stair,0.055555556,1
+DR2,99.9,arrival_6,16,51.61290323,stairs,stair,0.055555556,1
+DR2,99.9,exhibit_12,15,48.38709677,stairs,stair,0.055555556,1
+DR2,99.9,return,19,61.29032258,stairs,stair,0.055555556,1
+DR2,99.9,wanderer,16,51.61290323,stairs,stair,0.055555556,1
+brodeur,81,wild_west,13,41.93548387,table,stable,0.055555556,NA
+moreno-martinez,78,journey,12,38.70967742,tower,towers,0.055555556,1
+moreno-martinez,78,quest,9,29.03225806,tower,towers,0.055555556,1
+moreno-martinez,78,return,9,29.03225806,tower,towers,0.055555556,1
+boss,82,arrival_4,9,29.03225806,tshirt,shirt,0.055555556,1
+boss,82,arrival_5,17,54.83870968,tshirt,shirt,0.055555556,1
+boss,82,flowerman,14,45.16129032,tshirt,shirt,0.055555556,1
+boss,82,journey,8,25.80645161,tshirt,shirt,0.055555556,1
+boss,82,picture_this,9,29.03225806,tshirt,shirt,0.055555556,1
+boss,82,return,8,25.80645161,tshirt,shirt,0.055555556,1
+boss,82,wanderer,15,48.38709677,tshirt,shirt,0.055555556,1
+DR2,97.1428571,airport,13,41.93548387,waiter,water,0.055555556,NA
+DR2,97.1428571,arrival_2,14,45.16129032,waiter,water,0.055555556,NA
+DR2,97.1428571,arrival_4,9,29.03225806,waiter,water,0.055555556,NA
+DR2,97.1428571,arrival_5,18,58.06451613,waiter,water,0.055555556,NA
+DR2,97.1428571,being_a_pirate,25,80.64516129,waiter,water,0.055555556,NA
+DR2,97.1428571,birthday_party_fun,20,64.51612903,waiter,water,0.055555556,NA
+DR2,97.1428571,by_the_lake,27,87.09677419,waiter,water,0.055555556,NA
+DR2,97.1428571,campsite,16,51.61290323,waiter,water,0.055555556,NA
+DR2,97.1428571,deep_sea_divers,28,90.32258065,waiter,water,0.055555556,NA
+DR2,97.1428571,escape_from_the_zoo,15,48.38709677,waiter,water,0.055555556,NA
+DR2,97.1428571,flowerman,21,67.74193548,waiter,water,0.055555556,NA
+DR2,97.1428571,journey,26,83.87096774,waiter,water,0.055555556,NA
+DR2,97.1428571,make_a_splash,28,90.32258065,waiter,water,0.055555556,NA
+DR2,97.1428571,picture_this,12,38.70967742,waiter,water,0.055555556,NA
+DR2,97.1428571,quest,29,93.5483871,waiter,water,0.055555556,NA
+DR2,97.1428571,return,26,83.87096774,waiter,water,0.055555556,NA
+DR2,97.1428571,unfriendly_giants,21,67.74193548,waiter,water,0.055555556,NA
+DR2,97.1428571,waldo_1,13,41.93548387,waiter,water,0.055555556,NA
+DR2,97.1428571,wanderer,28,90.32258065,waiter,water,0.055555556,NA
+moreno-martinez,99,escape_from_the_zoo,18,58.06451613,zebra,zebras,0.055555556,1
+Phase 3 Norming,89.3,unfriendly_giants,11,35.48387097,giant,giants,0.055555556,1
+Phase 3 Norming,89.3,journey,15,48.38709677,steam,stream,0.055555556,NA
+Phase 3 Norming,89.3,return,14,45.16129032,steam,stream,0.055555556,NA
+Phase 3 Norming,93,wanderer,9,29.03225806,mother,other,0.055555556,NA
+Phase 3 Norming,71.4,arrival_1,9,29.03225806,mantel,mantle,0.055555556,NA
+Phase 3 Norming,96.4,escape_from_the_zoo,12,38.70967742,money,monkey,0.055555556,NA
+Phase 3 Norming,89.3,arrival_1,22,70.96774194,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,arrival_2,14,45.16129032,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,arrival_3,8,25.80645161,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,arrival_4,17,54.83870968,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,arrival_5,24,77.41935484,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,arrival_6,21,67.74193548,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,journey,8,25.80645161,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,quest,20,64.51612903,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,wanderer,27,87.09677419,papers,paper,0.055555556,1
+Phase 3 Norming,89.3,arrival_1,13,41.93548387,stream,steam,0.055555556,NA
+Phase 3 Norming,89.3,arrival_6,8,25.80645161,stream,steam,0.055555556,NA
+Phase 3 Norming,89.3,journey,8,25.80645161,stream,steam,0.055555556,NA
+Phase 3 Norming,89.3,wanderer,8,25.80645161,stream,steam,0.055555556,NA
+boss,100,arrival_1,16,51.61290323,feather,father,0.047619048,NA
+boss,100,arrival_4,17,54.83870968,feather,father,0.047619048,NA
+boss,100,arrival_5,9,29.03225806,feather,father,0.047619048,NA
+boss,100,arrival_6,12,38.70967742,feather,father,0.047619048,NA
+boss,100,journey,12,38.70967742,feather,father,0.047619048,NA
+boss,100,return,13,41.93548387,feather,father,0.047619048,NA
+Phase 3 Norming,92.8,return,20,64.51612903,father,feather,0.047619048,NA
+Phase 3 Norming,100,campsite,15,48.38709677,camper,campers,0.047619048,1
+DR2,93.3333333,wanderer,8,25.80645161,stoplight,spotlight,0.037037037,NA
+DR2,100,escape_from_the_zoo,25,80.64516129,rhinoceros,rhinocero,0.033333333,1
+DR2,100,quest,26,83.87096774,rhinoceros,rhinocero,0.033333333,1
+DR2,90,escape_from_the_zoo,13,40.625,icecreamcone,icecream cone,0.025641026,1
+DR2,90,dinosaurs_spacemen_and_ghouls,8,25,icecreamcone,icecream cone,0.025641026,1
