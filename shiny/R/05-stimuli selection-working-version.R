@@ -433,7 +433,10 @@ select_stimuli <- function(participant_theta,
             
             max_high = 60
             #print("study1 n")
+            print(total_tx_items)
+            print(nrow(discourse_items))
             N_naming = total_tx_items-nrow(discourse_items)
+            print(N_naming)
             total_items_check = total_tx_items
           }
 
@@ -453,10 +456,14 @@ select_stimuli <- function(participant_theta,
           additional_items = remaining_db |> 
             mutate(p_correct = p_cor(theta, difficulty),
                    closest = abs(ideal_prob_correct - p_correct)) |> 
-            filter(p_correct < 0.75) |> 
+            filter(p_correct < 0.75)
+          
+          additional_items <- additional_items |>
             distinct(lemma_naming, agreement, difficulty, filename,
                      in_discourse, p_correct, closest) |> 
-            arrange(closest) |> 
+            arrange(closest)
+          
+            additional_items = additional_items |> 
             head(N_naming)
           
           
@@ -468,6 +475,7 @@ select_stimuli <- function(participant_theta,
                    discourse_stimuli = stimuli,
                    agreement, item_difficulty = difficulty, core_lex_percent = percent,
                    condition, filename, p_correct) #, target
+          
           
   } else {
     
@@ -490,6 +498,7 @@ select_stimuli <- function(participant_theta,
              discourse_stimuli = stimuli,
              agreement, item_difficulty = difficulty, core_lex_percent = percent,
              condition, filename, p_correct)
+    
     
     # For study 2, will need to add error if not enough items are found here.  ########### Study 2 addition....
     
@@ -588,7 +597,6 @@ select_stimuli <- function(participant_theta,
     dat_nest = dat |> 
       nest_by(condition_all)
     
-    print(dat |> count(condition_all))
     # items_per_condition = ifelse(total_tx_items==180, total_tx_items/3)
     # ncontrol = 20 # always 20
     # ntx = items_per_condition-ncontrol # remaining items are tx regardless of study
@@ -664,11 +672,6 @@ select_stimuli <- function(participant_theta,
             # if the number of treated words is 8 not in discourse,
             # the number that are in discourse will be 12. 
             # 
-            # 
-            #      
-            print(head(tmp))
-            print(nrow(tmp))
-            
             n_total = nrow(tmp)
             in_discourse1 <- tmp[tmp$in_discourse == 1, ]
             in_discourse0 <- tmp[tmp$in_discourse == 0, ]

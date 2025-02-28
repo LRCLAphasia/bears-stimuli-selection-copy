@@ -45,6 +45,8 @@ read_in_all_files <- function(shiny,
     timestamp_file = here("shiny", "data", discourse_timestamp_file)
     naming_parameters_file = here("shiny", "data", naming_item_parameter_file)
     
+    print("running locally")
+    
   } else if(isTRUE(local)) {
     
     naming_file = here("shiny", "data", naming_database_file)
