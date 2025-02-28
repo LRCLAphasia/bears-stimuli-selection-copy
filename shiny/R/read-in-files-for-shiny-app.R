@@ -6,13 +6,13 @@
 # re-run R/04-join-naming-to-discourse.R.
 # save it in bears-stimuli-selection/data AND in bears-stimuli-selection/shiny/data/ 
 # (need to save in both locations)
-naming_database_file = "words 2024-08-29_numeric.csv" #  "final_database_4-11-23.csv"
+naming_database_file = "words_2024-11-21_sent_02-28-25.csv" #  "final_database_4-11-23.csv"
 
 # this is the output of 04-join-naming-to-discourse.R
 # if there are any changes to words-2024-01-29.csv, 
 # or the VTT files / the nounCounts files from discourse
 # then this file should be updated by re-running 04-join-naming-to-discourse.R.
-discourse_naming_joined_file = "join_checked_automated_10-2024.csv"
+discourse_naming_joined_file = "join_checked_automated_02-2025.csv"
 
 # this is the output of 03-timestamp-norming.R
 # If the VTT files change, then it should be updated by re-running 03-timestamp-norming.R
@@ -23,7 +23,7 @@ discourse_timestamp_file = "2023-08-14_timestamp.csv"
 # norming on items so that we have more data on age of acquisition or
 # NPhon or lexical frequency, update the input files in that script
 # and re-run it to update this file.
-naming_item_parameter_file = "AoA-phonemes-freq_combined_2024_08_23.csv"
+naming_item_parameter_file = "AoA-phonemes-freq_combined_handchecked_2024_11_22_sent_02-28-25.csv"
 
 
 

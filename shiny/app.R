@@ -57,7 +57,7 @@ ui <- page_sidebar(
                  ),
                  numericInput(inputId = "min_words_per_discourse_item",
                               label = "Minimum number of qualifying words to consider using a discourse item.",
-                              value = 4, min = 2, max = 6, step = 1),
+                              value = 3, min = 2, max = 6, step = 1),
                  sliderInput(inputId = "study2_max_items",
                               label = "Max number of treated words in study 2",
                               value = 200, min = 140, max = 200, step = 10, ticks = FALSE),
@@ -74,7 +74,7 @@ ui <- page_sidebar(
                  uiOutput("blacklist"),
                  numericInput(inputId = "min_naming_agreement",
                               label = "Min picture naming agreement allowed (%)",
-                              value = 75, min = 50, max = 100, step = 1),
+                              value = 70, min = 50, max = 100, step = 1),
                  numericInput(inputId = "min_discourse_salience",
                               label = "Min discourse salience allowed (%)",
                               value = 30, min = 20, max = 50, step = 1),
@@ -220,7 +220,7 @@ server <- function(input, output, session) {
   # -----------------------------------------------------------------------------# 
   
   output$blacklist <- renderUI({
-    
+    bl = c('motorbike', 'bedsidetable', 'caramel', 'crocodile', 'fritter', 'pendant', 'pie', 'pincers', 'toe')
     div(
       selectInput(inputId = "blacklist_discourse",
                   label = "Blacklist discourse items",
@@ -233,7 +233,7 @@ server <- function(input, output, session) {
                                                   min_discourse_items    = input$min_discourse_items,
                                                   total_tx_items         = as.numeric(input$total_tx_items)
                                                   )),
-      selectInput(inputId = "blacklist_naming",
+      selectInput(inputId = "blacklist_naming",selected = bl,
                   label = "Blacklist naming items",
                   multiple = TRUE,
                   choices = get_blacklist_options("naming",

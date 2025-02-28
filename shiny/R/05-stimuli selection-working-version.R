@@ -28,20 +28,23 @@ library(patchwork)
 #' @param total_tx_items total number of treatment items. defaults to 180 for study 1
 #'
 #' @return A list of values for the shiny app. output$dat returns the data
+#' 
+#' 
+#' #### NOTE TO SELF - defult values in functino are overwritten in app.R!!!!!
 select_stimuli <- function(participant_theta,
-                           min_naming_agreement = 75,
-                           min_discourse_salience = 33,
+                           min_naming_agreement = 70,
+                           min_discourse_salience = 30,
                            target_prob_correct = 0.33,
                            min_discourse_stimuli = 9,
                            min_discourse_items = 54,
                            total_tx_items = 180, # 180 vs 500 study 1 vs. study 2.
-                           min_words_per_discourse_item = 4,
+                           min_words_per_discourse_item = 3,
                            seed = 42,
                            participant_id,
                            shiny = TRUE,
                            updateProgress = NULL,
                            blacklist_discourse_items = NA,
-                           blacklist_naming_items = NA,
+                           blacklist_naming_items = "toe",
                            study2_max = 200
                            ){
   

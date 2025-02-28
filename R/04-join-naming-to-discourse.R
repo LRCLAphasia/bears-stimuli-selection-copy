@@ -93,22 +93,22 @@ sum(fuzz_join$dist > 0, na.rm = TRUE)
 # it as NA otherwise. Then saved that file as join_checked.csv and run
 # the code below to read it back in and join it to the fuzz_join data. 
 # Then re-save the fuzz_join dataframe after the left_join below.
-# write.csv(fuzz_join |> mutate(match = NA) |> filter(dist>0), here("output", "join_checked_10-2024.csv"), row.names = FALSE)
+# write.csv(fuzz_join |> mutate(match = NA) |> filter(dist>0), here("output", "join_checked_2-2025.csv"), row.names = FALSE)
 
 ## automate the hand-fixed...
 ## join_checked is a file that I fixed by hand and reuploaded
 ## so its still hand-fixed, but I'm just re-using the same hand-fixes if
 ## this script is re-run
-fixes <- read.csv(here("output", "join_checked_10-2024.csv")) |> 
+fixes <- read.csv(here("output", "join_checked_2-2025.csv")) |> 
   filter(match == 1, dist > 0) |> 
   select(lemma_naming, lemma_dis, match) |> 
   distinct()
 
 fuzz_join <- fuzz_join |> left_join(fixes, by = c("lemma_naming" = "lemma_naming", "lemma_dis" = "lemma_dis"))
 
-write.csv(fuzz_join, here::here("output", "join_checked_automated_10-2024.csv"), row.names = FALSE)
-write.csv(fuzz_join, here::here("data", "join_checked_automated_10-2024.csv"), row.names = FALSE)
-write.csv(fuzz_join, here::here("shiny", "data", "join_checked_automated_10-2024.csv"), row.names = FALSE)
+write.csv(fuzz_join, here::here("output", "join_checked_automated_02-2025.csv"), row.names = FALSE)
+write.csv(fuzz_join, here::here("data", "join_checked_automated_02-2025.csv"), row.names = FALSE)
+write.csv(fuzz_join, here::here("shiny", "data", "join_checked_automated_02-2025.csv"), row.names = FALSE)
 
 
 
