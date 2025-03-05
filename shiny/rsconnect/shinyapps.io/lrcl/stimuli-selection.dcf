@@ -1,0 +1,12 @@
+name: stimuli-selection
+title: stimuli-selection
+username: lrcl
+account: lrcl
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14166275
+bundleId: 9896331
+url: https://lrcl.shinyapps.io/stimuli-selection/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
